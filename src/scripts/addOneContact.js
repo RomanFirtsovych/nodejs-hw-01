@@ -1,15 +1,14 @@
-import fs from "fs/promises";
-import { PATH_DB } from "../constants/contacts.js";
 import { createFakeContact } from "../utils/createFakeContact.js";
 import { readContacts } from "../utils/readContacts.js";
+import { writeContacts } from "../utils/writeContacts.js"; // Використання утиліти
 
 export const addOneContact = async () => {
     try {
         const existingContacts = await readContacts();
-        const newContacts = createFakeContact();
-        const updatedContacts = [...existingContacts, newContacts];
-        await fs.writeFile(PATH_DB, JSON.stringify(updatedContacts, null, 2));
-        console.log(`✅ Додано новий контакт:`, newContacts);
+        const newContact = createFakeContact();
+        const updatedContacts = [...existingContacts, newContact];
+        await writeContacts(updatedContacts); // Використовуємо утиліту замість fs.writeFile
+        console.log(`✅ Додано новий контакт:`, newContact);
     } catch (error) {
         console.error("❌ Помилка додавання контакту:", error.message);
     }

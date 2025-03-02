@@ -1,9 +1,8 @@
-import fs from 'fs/promises';
-import { PATH_DB } from '../constants/contacts.js';
+import { writeContacts } from "../utils/writeContacts.js"; // Використання утиліти
 
 export const removeAllContacts = async () => {
     try {
-        await fs.writeFile(PATH_DB, JSON.stringify([], null, 2));
+        await writeContacts([]); // Використання утиліти writeContacts
         console.log("✅ Усі контакти успішно видалені!");
     } catch (error) {
         console.error("❌ Помилка видалення контактів:", error.message);
