@@ -4,9 +4,9 @@ import fs from 'fs/promises';
 export const writeContacts = async (updatedContacts) => {
     try {
         const data = JSON.stringify(updatedContacts, null, 2);
-        await fs.promises.writeFile(PATH_DB, data, 'utf-8');
-        console.log("Контакт успішно збережено!");
+        await fs.writeFile(PATH_DB, data, 'utf-8');
+        console.log("✅ Контакти успішно збережено!");
     } catch (error) {
-        console.log("Помилка запису у файл:" , error.message);
+        console.error("❌ Помилка запису у файл:", error.message);
     }
 };
